@@ -8,30 +8,40 @@ package edu.eci.arsw.blueprints.services;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
-import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
+import edu.eci.arsw.blueprints.persistence.impl.BlueprintsPersistence;
+import filtros.Filtro;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author hcadavid
  */
-@Service
+@Service("BluePrintServices")
 public class BlueprintsServices {
-   
     @Autowired
-    BlueprintsPersistence bpp=null;
+    @Qualifier("InMemoryBlue")
+    BlueprintsPersistence bpp;
+    @Autowired
+    @Qualifier("FiltroA")
+    Filtro filtro;
     
     public void addNewBlueprint(Blueprint bp){
-        
+        bpp.addNewBlueprint(bp);
     }
     
-    public Set<Blueprint> getAllBlueprints(){
-        return null;
+    public List<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
+        return bpp.getAllBluePrints();
     }
+    public Blueprint useFilter(Blueprint bp){
+        return filtro.filtrar(bp);
+    }
+    
     
     /**
      * 
@@ -41,7 +51,7 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return useFilter(bpp.getBlueprint(author, name));
     }
     
     /**
@@ -50,8 +60,13 @@ public class BlueprintsServices {
      * @return all the blueprints of the given author
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
-    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public List<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
+        List<Blueprint> planos=bpp.getBlueprintsByAuthor(author);
+        for (int i=0; i<planos.size();i++){
+            planos.set(i, useFilter(planos.get(i)));
+        }
+        
+            return planos;
     }
     
 }

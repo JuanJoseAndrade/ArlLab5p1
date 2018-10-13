@@ -44,6 +44,23 @@ public class Blueprint {
     public void addPoint(Point p){
         this.points.add(p);
     }
+    public void removePoint(Point p){
+        points.remove(p);
+
+    }
+    public void removeEqualPoints(Point p){
+        int cont=0;
+        for (Point point:points){
+            if(point.getX()==p.getX()&&point.getY()==p.getY()){
+                cont+=1;
+            }
+            if(cont>1){
+                    points.remove(point);
+                    cont-=1;
+                }
+        }
+        this.points.add(p);
+    }
 
     @Override
     public String toString() {
