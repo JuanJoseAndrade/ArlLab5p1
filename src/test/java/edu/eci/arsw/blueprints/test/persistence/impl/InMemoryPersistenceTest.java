@@ -5,11 +5,11 @@
  */
 package edu.eci.arsw.blueprints.test.persistence.impl;
 
-import edu.eci.arsw.blueprints.model.Blueprint;
-import edu.eci.arsw.blueprints.model.Point;
-import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
-import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
-import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+import edu.eci.arsw.model.Blueprint;
+import edu.eci.arsw.model.Point;
+import edu.eci.arsw.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.persistence.BlueprintPersistenceException;
+import edu.eci.arsw.persistenceimpl.InMemoryBlueprintPersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;

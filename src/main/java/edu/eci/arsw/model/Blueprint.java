@@ -1,5 +1,5 @@
 
-package edu.eci.arsw.blueprints.model;
+package edu.eci.arsw.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ public class Blueprint {
          
     public Blueprint(String author, String name){
         this.name=name;
-        points=new ArrayList<>();
+        points=new ArrayList<Point>();
     }
 
     public Blueprint() {
@@ -48,19 +48,10 @@ public class Blueprint {
         points.remove(p);
 
     }
-    public void removeEqualPoints(Point p){
-        int cont=0;
-        for (Point point:points){
-            if(point.getX()==p.getX()&&point.getY()==p.getY()){
-                cont+=1;
-            }
-            if(cont>1){
-                    points.remove(point);
-                    cont-=1;
-                }
-        }
-        this.points.add(p);
+    public void setPoints(List<Point> newPoints){
+        points=newPoints;
     }
+    
 
     @Override
     public String toString() {

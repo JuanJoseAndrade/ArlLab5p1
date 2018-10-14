@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.blueprints.services;
+package edu.eci.arsw.services;
 
-import edu.eci.arsw.blueprints.model.Blueprint;
-import edu.eci.arsw.blueprints.model.Point;
-import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
-import edu.eci.arsw.blueprints.persistence.impl.BlueprintsPersistence;
-import filtros.Filtro;
+import edu.eci.arsw.model.Blueprint;
+import edu.eci.arsw.model.Point;
+import edu.eci.arsw.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.persistenceimpl.BlueprintsPersistence;
+import edu.eci.arsw.filtros.Filtro;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +27,11 @@ public class BlueprintsServices {
     @Autowired
     @Qualifier("InMemoryBlue")
     BlueprintsPersistence bpp;
+   
     @Autowired
     @Qualifier("FiltroA")
     Filtro filtro;
-    
+    public BlueprintsServices(){}
     public void addNewBlueprint(Blueprint bp){
         bpp.addNewBlueprint(bp);
     }
@@ -38,8 +39,9 @@ public class BlueprintsServices {
     public List<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
         return bpp.getAllBluePrints();
     }
-    public Blueprint useFilter(Blueprint bp){
-        return filtro.filtrar(bp);
+    public void useFilter(Blueprint bp){
+         filtro.filtrar(bp);
+        
     }
     
     
@@ -51,7 +53,7 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
-        return useFilter(bpp.getBlueprint(author, name));
+        return bpp.getBlueprint(author, name);
     }
     
     /**
@@ -62,10 +64,6 @@ public class BlueprintsServices {
      */
     public List<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
         List<Blueprint> planos=bpp.getBlueprintsByAuthor(author);
-        for (int i=0; i<planos.size();i++){
-            planos.set(i, useFilter(planos.get(i)));
-        }
-        
             return planos;
     }
     

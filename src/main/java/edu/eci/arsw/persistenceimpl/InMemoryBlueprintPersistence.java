@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.blueprints.persistence.impl;
+package edu.eci.arsw.persistenceimpl;
 
-import edu.eci.arsw.blueprints.model.Blueprint;
-import edu.eci.arsw.blueprints.model.Point;
-import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
-import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
+import edu.eci.arsw.model.Blueprint;
+import edu.eci.arsw.model.Point;
+import edu.eci.arsw.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.persistence.BlueprintPersistenceException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
-
     public InMemoryBlueprintPersistence() {
  
     }    
@@ -51,7 +50,6 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
                 authorblueprint.add(tupla.getValue());
             }
         }
-        
         return authorblueprint;
     }
 

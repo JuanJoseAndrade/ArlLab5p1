@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filtros;
+package edu.eci.arsw.filtros;
 
-import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.model.Blueprint;
 
 /**
  *
  * @author juan
  */
 public interface Filtro {
-    public Blueprint filtrar(Blueprint plano);
+    public void filtrar(Blueprint plano);
 }
