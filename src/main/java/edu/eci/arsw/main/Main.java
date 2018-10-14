@@ -35,7 +35,6 @@ static BlueprintsServices servicio;
          ApplicationContext blueprintbeans = new ClassPathXmlApplicationContext("applicationContext.xml");
          servicio=blueprintbeans.getBean(BlueprintsServices.class);
          registrarPlanos();
-         
          consultarPlanos();
          consultarPlanosDeAutor("mack");
          consultarPlanosDeAutor("jhon");
